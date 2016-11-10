@@ -27,7 +27,7 @@ A crash recovery framework!
 **Using Gradle**
 
 ```gradle
-compile 'com.zxy.android:recovery:0.0.5'
+compile 'com.zxy.android:recovery:0.0.8'
 ```
 
 **Using Maven**
@@ -36,7 +36,7 @@ compile 'com.zxy.android:recovery:0.0.5'
 <dependency>
   	<groupId>com.zxy.android</groupId>
   	<artifactId>recovery</artifactId>
-  	<version>0.0.5</version>
+  	<version>0.0.8</version>
   	<type>pom</type>
 </dependency>
 ```
@@ -123,6 +123,9 @@ You can customize UI by setting these properties in your styles file:
 ----
 ## **Update history**
 `VERSION-0.0.5`——**Support silent recovery**
+`VERSION-0.0.6`——**Strengthen the protection of silent restore mode**
+`VERSION-0.0.7`——**Add confusion configuration**
+`VERSION-0.0.8`——**Add the skip Activity features,method:skip()**
 
 # **LICENSE**
 

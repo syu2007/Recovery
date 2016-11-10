@@ -11,6 +11,10 @@ import com.zxy.recovery.exception.RecoveryException;
 import com.zxy.recovery.tools.RecoveryLog;
 import com.zxy.recovery.tools.RecoveryUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by zhengxiaoyong on 16/8/26.
  */
@@ -42,6 +46,8 @@ public class Recovery {
 
     private SilentMode mSilentMode = SilentMode.RECOVER_ACTIVITY_STACK;
 
+    private List<Class<? extends Activity>> mSkipActivities = new ArrayList<>();
+
     private Recovery() {
     }
 
@@ -61,6 +67,7 @@ public class Recovery {
             throw new RecoveryException("Context can not be null!");
         if (!(context instanceof Application))
             context = context.getApplicationContext();
+//        if (!RecoveryUtil.isMainProcess(context)) return;
         mContext = context;
         registerRecoveryHandler();
         registerRecoveryLifecycleCallback();
@@ -94,6 +101,13 @@ public class Recovery {
     public Recovery silent(boolean enabled, SilentMode mode) {
         this.isSilentEnabled = enabled;
         this.mSilentMode = mode == null ? SilentMode.RECOVER_ACTIVITY_STACK : mode;
+        return this;
+    }
+
+    public Recovery skip(Class<? extends Activity>... activities) {
+        if (activities == null)
+            return this;
+        mSkipActivities.addAll(Arrays.asList(activities));
         return this;
     }
 
@@ -152,6 +166,10 @@ public class Recovery {
 
     SilentMode getSilentMode() {
         return mSilentMode;
+    }
+
+    public List<Class<? extends Activity>> getSkipActivities() {
+        return mSkipActivities;
     }
 
     public enum SilentMode {
